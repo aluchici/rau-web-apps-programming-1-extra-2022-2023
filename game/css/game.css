@@ -1,0 +1,46 @@
+.main-grid {
+    display: grid;
+    grid-template-columns: 0.1fr 1fr 0.1fr;
+    grid-template-rows: 1fr 0.1fr;
+    border: 1px solid red;
+}
+
+.canvas {
+    grid-row-start: 1;
+    grid-column-start: 2;
+    border: 1px solid green;
+    margin: 3%;
+}
+
+.next-button {
+    grid-row-start: 2;
+    grid-column-start: 1;
+    border: 1px solid green;
+    margin: 3%;
+}
+
+.same-button {
+    grid-row-start: 2;
+    grid-column-start: 2;
+    border: 1px solid green;
+    margin: 3%;
+}
+
+.different-button {
+    grid-row-start: 2;
+    grid-column-start: 3;
+    border: 1px solid green;
+    margin: 3%;
+}
+
+.viewport {
+    width: 100%;
+    height: 500px;
+}
+
+.points {
+    grid-row-start: 1;
+    grid-column-start: 3;
+    border: 1px solid green;
+    margin: 3%;
+}
