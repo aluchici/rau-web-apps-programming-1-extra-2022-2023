@@ -34,7 +34,7 @@ class Game {
     }
 
     generateImagePath(suit, symbol) {
-        const path = `/Users/luchicila/Work/RAU/rau-web-apps-programming-1-extra-2022-2023/game/assets/card_${suit}_${symbol}.png`;
+        const path = `/Users/luchicla/Work/RAU/rau-web-apps-programming-1-extra-2022-2023/game/assets/card_${suit}_${symbol}.png`;
         return path;
     }
 
@@ -80,7 +80,7 @@ class Game {
     }
 
     getBackCard() {
-        const imagePath = "/Users/luchicila/Work/RAU/rau-web-apps-programming-1-extra-2022-2023/game/assets/card_back.png";
+        const imagePath = "/Users/luchicla/Work/RAU/rau-web-apps-programming-1-extra-2022-2023/game/assets/card_back.png";
         const card = new Card(imagePath);
         return card;
     }
@@ -160,4 +160,54 @@ function different() {
     
     changePoints(POINTS);
     next();
+}
+
+const url = "http://localhost:5001/api/v1/setup-game";
+const params = {
+    "method": "GET",
+    "mode": "cors",
+    "headers": {
+        "Content-Type": "application/json"
+    }
+}
+
+fetch(url, params).then(convertResponse).then(afterDataReceived).catch(ifError)
+
+function convertResponse(response) {
+    if (!response.ok) {
+        throw Error("Failed to get data.");
+    }
+    return response.json();
+}
+
+function afterDataReceived(data) {
+    POINTS = data["initial_score"];
+    changePoints(POINTS);
+}
+
+function ifError(error) {
+    alert(error.message);
+}
+
+function displaySuccessMessage(data) {
+    alert("Game data saved successfully...");
+}
+
+function saveGameData() {
+    const url = "http://localhost:5001/api/v1/save-game-data";
+    const body = {
+        "points": POINTS,
+        "number_of_cards_left": game.cards.length
+    }
+    const params = {
+        "method": "POST",
+        "mode": "cors",
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "body": JSON.stringify(body)
+    }
+
+    fetch(url, params).then(convertResponse).then(displaySuccessMessage).catch(ifError);
+
 }
